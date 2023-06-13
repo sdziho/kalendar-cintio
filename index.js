@@ -1,11 +1,14 @@
 const express = require("express");
+const app = express();
 const bodyParser = require("body-parser");
 const passport = require("passport");
 const { DB, PORT } = require("./config");
 const { connect } = require("mongoose");
 const { success, error } = require("consola");
+const cors = require('cors');
 
-const app = express();
+// Add the CORS middleware before defining your routes
+app.use(cors());
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(bodyParser.urlencoded({ extended: true }));
