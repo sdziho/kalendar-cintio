@@ -58,7 +58,7 @@ const deleteDates = async (req, res) => {
       return obj._id == req.body._id;
     });
 
-    const daysLeft = myDates.freeDays + req.body.deletedDates;
+    const daysLeft = myDates.freeDays + req.body.deletedDays;
     if (exists) {
       await Date.findOneAndUpdate(
         { userID: user._id },
