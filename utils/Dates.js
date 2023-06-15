@@ -9,6 +9,19 @@ const setDates = async (req, res) => {
       endDate: req.body.endDate,
     };
     const myDates = await Date.findOne({ userID: user._id });
+    console.log(myDates);
+    if (!myDates) {
+      const myDate = new Date({
+        freeDays: 20 - req.body.usedDays,
+        userID: user._id,
+        dates: dates,
+      });
+      myDate.save();
+      return res.status(201).json({
+        message: "Dates successfully added.",
+        success: true,
+      });
+    }
     const daysLeft = myDates.freeDays - req.body.usedDays;
     if (daysLeft > 0) {
       await Date.findOneAndUpdate(
