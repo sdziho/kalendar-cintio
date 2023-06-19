@@ -1,6 +1,12 @@
 const router = require("express").Router();
 
-const { userLogin, allUsers, userRegister } = require("../utils/Auth");
+const {
+  userLogin,
+  allUsers,
+  userRegister,
+  userAuth,
+  getUserInfo,
+} = require("../utils/Auth");
 
 router.get("/", async (req, res) => {
   return allUsers(req, res);
@@ -11,6 +17,9 @@ router.post("/login", async (req, res) => {
 });
 router.post("/register", async (req, res) => {
   await userRegister(req, res);
+});
+router.get("/info", userAuth, async (req, res) => {
+  await getUserInfo(req, res);
 });
 
 module.exports = router;

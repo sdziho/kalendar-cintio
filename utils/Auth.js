@@ -119,17 +119,30 @@ const serializeUser = (user) => {
       email: user.email,
       name: user.name,
       _id: user._id,
+      role: user.role,
     };
   } catch (err) {
     console.error(err.message);
     res.status(500).send("Server Error");
   }
 };
-
+const getUserInfo = async (req, res) => {
+  try {
+    const user = serializeUser(req.user);
+    console.log(user);
+    return res.status(200).json(user);
+  } catch {
+    return res.status(500).json({
+      message: "Unable To Finish",
+      success: false,
+    });
+  }
+};
 module.exports = {
   userRegister,
   userLogin,
   userAuth,
   serializeUser,
   allUsers,
+  getUserInfo,
 };
