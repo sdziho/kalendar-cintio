@@ -8,7 +8,7 @@ const {
   getUserInfo,
 } = require("../utils/Auth");
 
-router.get("/", async (req, res) => {
+router.get("/",userAuth, async (req, res) => {
   return allUsers(req, res);
 });
 
